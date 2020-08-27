@@ -1,0 +1,18 @@
+{
+    "name":"Preferencia",
+    "namespace":"App",
+    "complete_name":"App\\Preferencia",
+    "table":{
+        "name":"preferencias",
+        "colums":[
+                    { "name":"id", "type":"Integer", "length":"", "nullable":"", "autoincrement":"1", "default":"" },
+                                { "name":"men_id", "type":"Integer", "length":"", "nullable":"1", "autoincrement":"", "default":"" },
+                                { "name":"pre_fecha", "type":"Date", "length":"0", "nullable":"", "autoincrement":"", "default":"" },
+                                { "name":"pre_descripcion", "type":"Text", "length":"65535", "nullable":"1", "autoincrement":"", "default":"" },
+                                { "name":"created_at", "type":"DateTime", "length":"0", "nullable":"1", "autoincrement":"", "default":"" },
+                                { "name":"updated_at", "type":"DateTime", "length":"0", "nullable":"1", "autoincrement":"", "default":"" },
+                                { "name":"deleted_at", "type":"DateTime", "length":"0", "nullable":"1", "autoincrement":"", "default":"" }                ]
+    },
+    "relations": [
+            ]
+}

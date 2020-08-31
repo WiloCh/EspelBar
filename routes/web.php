@@ -22,6 +22,9 @@ Route::get('/more', 'MoreController@index')->name('more');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('users', 'UserController');
+//Roles y Permisos
+Route::resource('roles', 'RolesController');
+//
 Route::resource('campuses', 'CampusController');
 Route::resource('bars', 'BarController');
 Route::resource('buzons', 'BuzonController');

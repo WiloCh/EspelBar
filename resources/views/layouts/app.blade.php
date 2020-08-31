@@ -105,6 +105,7 @@
                             <a class="dropdown-item" href="http://localhost/EspelBar/public/buzons">Buzon</a>
                             <a class="dropdown-item" href="http://localhost/EspelBar/public/preferencias">Preferencias</a>
                             <a class="dropdown-item" href="http://localhost/EspelBar/public/users">Usuarios</a>
+                            <a class="dropdown-item" href="http://localhost/EspelBar/public/roles">Roles</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Role;
+use App\Permission;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller
@@ -49,6 +50,17 @@ class RolesController extends Controller
         $role->slug = $request->role_slug;
         $role-> save();
 
+        $listOfPermissions = explode(',', $request->roles_permissions);//crear una matriz a partir de permisos separados / comas
+        
+        foreach ($listOfPermissions as $permission) {
+            $permissions = new Permission();
+            $permissions->name = $permission;
+            $permissions->slug = strtolower(str_replace(" ", "-", $permission));
+            $permissions->save();
+            $role->permissions()->attach($permissions->id);
+            $role->save();
+        }
+
         return redirect('/roles');
     }
 
@@ -91,6 +103,20 @@ class RolesController extends Controller
         $role->name = $request->role_name;
         $role->slug = $request->role_slug;
         $role->save();
+        
+        $role->permissions()->delete();
+        $role->permissions()->detach();
+
+        $listOfPermissions = explode(',', $request->roles_permissions);//crear una matriz a partir de permisos separados / comas
+        
+        foreach ($listOfPermissions as $permission) {
+            $permissions = new Permission();
+            $permissions->name = $permission;
+            $permissions->slug = strtolower(str_replace(" ", "-", $permission));
+            $permissions->save();
+            $role->permissions()->attach($permissions->id);
+            $role->save();
+        }
 
         return redirect('/roles');
     }
@@ -103,7 +129,9 @@ class RolesController extends Controller
      */
     public function destroy(Request $request, Role $role)
     {
+        $role->permissions()->delete();
         $role->delete();
+        $role->permissions()->detach();
 
         return redirect('/roles');
     }

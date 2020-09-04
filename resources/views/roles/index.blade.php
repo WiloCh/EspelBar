@@ -33,7 +33,15 @@
                             <td>{{ $role['name'] }}</td>
                             <td>{{ $role['slug'] }}</td>
                             <td>
-                                .......
+                                @if ($role->permissions != null)
+                                    
+                                    @foreach ($role->permissions as $permission)
+                                    <span class="badge badge-secondary">
+                                        {{ $permission->name }}                                    
+                                    </span>
+                                    @endforeach
+                                
+                                @endif
                             </td>
                             <td>
                                 <a href="{{route('roles.show',$role['id'] )}}"><i>

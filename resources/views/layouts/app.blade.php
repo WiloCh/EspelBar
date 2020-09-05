@@ -84,15 +84,15 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link text-white" href="http://localhost/EspelBar/public/home">Inicio <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{{route('home.index')}}">Inicio <span class="sr-only">(current)</span></a>
                 </li>
                     <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Precesos
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="http://localhost/EspelBar/public/menus">Menu</a>
-                            <a class="dropdown-item" href="http://localhost/EspelBar/public/snacks">Snacks</a>
+                            <a class="dropdown-item" href="{{route('menus.index')}}">Menu</a>
+                            <a class="dropdown-item" href="{{route('snacks.index')}}">Snacks</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -100,11 +100,11 @@
                             Administracion
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="http://localhost/EspelBar/public/campuses">Campus</a>
-                            <a class="dropdown-item" href="http://localhost/EspelBar/public/bars">Bares</a>
-                            <a class="dropdown-item" href="http://localhost/EspelBar/public/buzons">Buzon</a>
-                            <a class="dropdown-item" href="http://localhost/EspelBar/public/preferencias">Preferencias</a>
-                            <a class="dropdown-item" href="http://localhost/EspelBar/public/users">Usuarios</a>
+                            <a class="dropdown-item" href="{{route('campuses.index')}}">Campus</a>
+                            <a class="dropdown-item" href="{{route('bars.index')}}">Bares</a>
+                            <a class="dropdown-item" href="{{route('buzons.index')}}">Buzon</a>
+                            <a class="dropdown-item" href="{{route('preferencias.index')}}">Preferencias</a>
+                            <a class="dropdown-item" href="{{route('users.index')}}">Usuarios</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -112,8 +112,8 @@
                             Reportes
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Buzon</a>
-                            <a class="dropdown-item" href="#">Preferencia</a>
+                            <a class="dropdown-item" href="{{route('buzons.index')}}">Buzon</a>
+                            <a class="dropdown-item" href="{{route('preferencias.index')}}">Preferencia</a>
                         </div>
                     </li>
                 </ul>

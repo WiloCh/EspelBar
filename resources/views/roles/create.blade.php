@@ -17,7 +17,7 @@
             </div>
             @endif
 
-            <form method="POST" action="{{route('roles.store')}}">
+            <form method="POST" action="{{route('roles.store')}}" novalidate>
                 {{ csrf_field() }}
 
                 <div class="form-group">

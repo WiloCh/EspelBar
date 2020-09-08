@@ -70,8 +70,26 @@
                             </td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
-                            <td>Role</td>
-                            <td>Permissions</td>
+                            <td>
+                                @if ($user->roles->isNotEmpty())
+                                    @foreach ($user->roles as $role)
+                                        <span class="badge badge-secondary">
+                                            {{ $role->name }}
+                                        </span>
+                                    @endforeach
+                                @endif
+                            </td>
+                            <td>
+                                @if ($user->permissions->isNotEmpty())
+                                        
+                                    @foreach ($user->permissions as $permission)
+                                        <span class="badge badge-secondary">
+                                            {{ $permission->name }}                                    
+                                        </span>
+                                    @endforeach
+                                    
+                                @endif
+                            </td>
 
                         </tr>
                         @empty

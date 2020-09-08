@@ -27,13 +27,25 @@
             <div class="form-group">
                 <label for="value" class="card-title">Role</label>
                 <p class="card-text">
-                    .......
+                    @if ($user->roles->isNotEmpty())
+                        @foreach ($user->roles as $role)
+                            <span class="badge badge-primary">
+                                {{ $role->name }}
+                            </span>
+                        @endforeach
+                    @endif
                 </p>
             </div>
             <div class="form-group">
                 <label for="value" class="card-title">Permissions</label>
                 <p class="card-text">
-                    .......
+                    @if ($user->permissions->isNotEmpty())                                        
+                        @foreach ($user->permissions as $permission)
+                            <span class="badge badge-success">
+                                {{ $permission->name }}                                    
+                            </span>
+                        @endforeach            
+                    @endif
                 </p>
             </div>
         </div>

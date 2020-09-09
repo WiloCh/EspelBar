@@ -32,4 +32,23 @@ class ReportesController extends Controller
         ->get();
         return view('reportes.BaresDisponibles',compact('bares'));
     }
+
+    public function ElementosDisponibles(Request $request)
+    {
+        $snacks=DB::table('snacks')
+        ->join('bars', 'snacks.bar_id', '=', 'bars.id')
+        ->select('snacks.nombre','snacks.precio','snacks.disponible')
+        ->where('snacks.disponible','1')
+        ->groupBy('snacks.nombre','snacks.precio','snacks.disponible') 
+        ->get();
+
+        $menus=DB::table('menus')
+        ->join('bars', 'menus.bar_id', '=', 'bars.id')
+        ->select('menus.nombre','menus.precio','menus.disponible')
+        ->where('menus.disponible','1')
+        ->groupBy('menus.nombre','menus.precio','menus.disponible') 
+        ->get();
+
+        return view('reportes.ElementosDisponibles',compact('snacks','menus'));
+    }
 }

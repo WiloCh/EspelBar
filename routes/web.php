@@ -31,3 +31,4 @@ Route::resource('preferencias', 'PreferenciaController');
 Route::resource('home', 'HomeController');
 
 Route::get('reportes/users','ReportesController@users')->name('reportes.users');
+Route::get('reportes/BaresDisponibles','ReportesController@BaresDisponibles')->name('reportes.BaresDisponibles');

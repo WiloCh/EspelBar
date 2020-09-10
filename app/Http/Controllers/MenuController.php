@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\MenuPostRequest;
 use App\Menu;
+use Illuminate\Support\Facades\Gate;
 
 
 class MenuController extends Controller
@@ -28,6 +29,7 @@ class MenuController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Menu::class);
         return view('menus.create');
     }
 
@@ -40,11 +42,13 @@ class MenuController extends Controller
 
     public function edit(Request $request, Menu $menu)
     {
+        $this->authorize('edit', $menu);
         return view('menus.edit', compact('menu'));
     }
 
     public function update(MenuPostRequest $request, Menu $menu)
     {
+        $this->authorize('update', $menu);
         $data = $request->validated();
         $menu->fill($data);
         $menu->save();
@@ -53,6 +57,7 @@ class MenuController extends Controller
 
     public function destroy(Request $request, Menu $menu)
     {
+        $this->authorize('delete', $menu);
         $menu->delete();
         return redirect()->route('menus.index')->with('status', 'Registro Eliminado Exitosamente...!');
     }

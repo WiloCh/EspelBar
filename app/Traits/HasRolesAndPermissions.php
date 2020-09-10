@@ -7,6 +7,17 @@ use App\Permission;
 trait HasRolesAndPermissions
 {
     /**
+     * Undocumented function
+     *
+     * @return boolean
+     */
+    public function isAdmin()
+    {
+        if($this->roles->contains('slug', 'admin')){
+            return true;
+        }
+    }
+    /**
      * @return mixed
      */
     public function roles()
@@ -20,5 +31,24 @@ trait HasRolesAndPermissions
     public function permissions()
     {
         return $this->belongsToMany(Permission::class,'users_permissions');
+    }
+
+    public function hasRole($role)
+    {        
+        if( strpos($role, ',') !== false ){
+
+            $listOfRoles = explode(',',$role);
+
+            foreach ($listOfRoles as $role) {                    
+                if ($this->roles->contains('slug', $role)) {
+                    return true;
+                }
+            }
+        }else{                
+            if ($this->roles->contains('slug', $role)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

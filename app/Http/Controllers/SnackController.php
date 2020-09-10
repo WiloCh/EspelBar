@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\SnackPostRequest;
 use App\Snack;
+use Illuminate\Support\Facades\Gate;
 
 
 class SnackController extends Controller
@@ -28,6 +29,7 @@ class SnackController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Snack::class);
         return view('snacks.create');
     }
 
@@ -40,11 +42,13 @@ class SnackController extends Controller
 
     public function edit(Request $request, Snack $snack)
     {
+        $this->authorize('edit', $snack);
         return view('snacks.edit', compact('snack'));
     }
 
     public function update(SnackPostRequest $request, Snack $snack)
     {
+        $this->authorize('update', $snack);
         $data = $request->validated();
         $snack->fill($data);
         $snack->save();
@@ -53,6 +57,7 @@ class SnackController extends Controller
 
     public function destroy(Request $request, Snack $snack)
     {
+        $this->authorize('delete', $snack);
         $snack->delete();
         return redirect()->route('snacks.index')->with('status', 'Registro Eliminado Exitosamente...!');
     }

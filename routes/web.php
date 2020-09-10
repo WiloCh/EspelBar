@@ -21,12 +21,12 @@ Auth::routes();
 Route::get('/more', 'MoreController@index')->name('more');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('users', 'UserController');
+Route::resource('users', 'UserController')->middleware('role:admin,manager');
 //Roles y Permisos
-Route::resource('roles', 'RolesController');
+Route::resource('roles', 'RolesController')->middleware('can:isAdmin');
 //
-Route::resource('campuses', 'CampusController');
-Route::resource('bars', 'BarController');
+Route::resource('campuses', 'CampusController')->middleware('can:isAdmin');
+Route::resource('bars', 'BarController')->middleware('role:admin,manager');
 Route::resource('buzons', 'BuzonController');
 Route::resource('snacks', 'SnackController');
 Route::resource('menus', 'MenuController');

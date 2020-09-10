@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\PreferenciaPostRequest;
 use App\Preferencia;
+use Illuminate\Support\Facades\Gate;
 
 
 class PreferenciaController extends Controller
@@ -28,6 +29,7 @@ class PreferenciaController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Preferencia::class);
         return view('preferencias.create');
     }
 
@@ -40,11 +42,13 @@ class PreferenciaController extends Controller
 
     public function edit(Request $request, Preferencia $preferencia)
     {
+        $this->authorize('edit', $preferencia);
         return view('preferencias.edit', compact('preferencia'));
     }
 
     public function update(PreferenciaPostRequest $request, Preferencia $preferencia)
     {
+        $this->authorize('update', $preferencia);
         $data = $request->validated();
         $preferencia->fill($data);
         $preferencia->save();
@@ -53,6 +57,7 @@ class PreferenciaController extends Controller
 
     public function destroy(Request $request, Preferencia $preferencia)
     {
+        $this->authorize('delete', $preferencia);
         $preferencia->delete();
         return redirect()->route('preferencias.index')->with('status', 'Registro Eliminado Exitosamente...!');
     }

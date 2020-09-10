@@ -35,7 +35,8 @@
                     @endif
                     <tbody>
                         @forelse($users as $user)
-                        <tr>
+                        @if(!\Auth::user()->hasRole('admin') && $user->hasRole('admin')) @continue; @endif
+                        <tr {{ Auth::user()->id == $user->id ? 'bgcolor=#ddd' : '' }}> 
                             <td>
                                 <a href="{{route('users.show',['user'=>$user] )}}" class="btn btn-info">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill"

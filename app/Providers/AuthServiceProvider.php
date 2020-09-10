@@ -13,7 +13,10 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Menu' => 'App\Policies\MenuPolicy',
+        'App\Snack' => 'App\Policies\SnackPolicy',
+        'App\Buzon' => 'App\Policies\BuzonPolicy',
+        'App\Preferencia' => 'App\Policies\PreferenciaPolicy'
     ];
 
     /**
@@ -24,7 +27,17 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        
+        Gate::define('isAdmin', function ($user) {
+            return $user->roles->first()->slug == 'admin';
+        });
 
-        //
+        Gate::define('isManager', function ($user) {
+            return $user->roles->first()->slug == 'manager';
+        });
+
+        Gate::define('isBar Editor', function ($user) {
+            return $user->roles->first()->slug == 'bar-editor';
+        });
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BuzonPostRequest;
 use App\Buzon;
+use Illuminate\Support\Facades\Gate;
 
 
 class BuzonController extends Controller
@@ -28,6 +29,7 @@ class BuzonController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Buzon::class);
         return view('buzons.create');
     }
 
@@ -40,11 +42,13 @@ class BuzonController extends Controller
 
     public function edit(Request $request, Buzon $buzon)
     {
+        $this->authorize('edit', $buzon);
         return view('buzons.edit', compact('buzon'));
     }
 
     public function update(BuzonPostRequest $request, Buzon $buzon)
     {
+        $this->authorize('update', $buzon);
         $data = $request->validated();
         $buzon->fill($data);
         $buzon->save();
@@ -53,6 +57,7 @@ class BuzonController extends Controller
 
     public function destroy(Request $request, Buzon $buzon)
     {
+        $this->authorize('delete', $buzon);
         $buzon->delete();
         return redirect()->route('buzons.index')->with('status', 'Registro Eliminado Exitosamente...!');
     }

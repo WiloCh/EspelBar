@@ -57,7 +57,10 @@
                         @else
                             <li class="nav-item dropdown ">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }}
+                                    (@auth
+                                        {{ Auth::user()->roles->isNotEmpty() ? Auth::user()->roles->first()->name : "" }}
+                                    @endauth) <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -65,9 +68,9 @@
                                        onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-door-open" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M1 15.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM11.5 2H11V1h.5A1.5 1.5 0 0 1 13 2.5V15h-1V2.5a.5.5 0 0 0-.5-.5z"/>
-                                        <path fill-rule="evenodd" d="M10.828.122A.5.5 0 0 1 11 .5V15h-1V1.077l-6 .857V15H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117z"/>
-                                        <path d="M8 9c0 .552.224 1 .5 1s.5-.448.5-1-.224-1-.5-1-.5.448-.5 1z"/>
+                                            <path fill-rule="evenodd" d="M1 15.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM11.5 2H11V1h.5A1.5 1.5 0 0 1 13 2.5V15h-1V2.5a.5.5 0 0 0-.5-.5z"/>
+                                            <path fill-rule="evenodd" d="M10.828.122A.5.5 0 0 1 11 .5V15h-1V1.077l-6 .857V15H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117z"/>
+                                            <path d="M8 9c0 .552.224 1 .5 1s.5-.448.5-1-.224-1-.5-1-.5.448-.5 1z"/>
                                         </svg>
                                         {{ __('Logout') }}
                                     </a>
@@ -100,17 +103,26 @@
                             <a class="dropdown-item" href="http://localhost/EspelBar/public/snacks">Snacks</a>
                         </div>
                     </li>
+                    @canany(['isAdmin','isManager','isBar Editor'])
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Administracion
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            @can('isAdmin')
                             <a class="dropdown-item" href="http://localhost/EspelBar/public/campuses">Campus</a>
+                            @endcan
+                            @canany(['isAdmin','isManager'])
                             <a class="dropdown-item" href="http://localhost/EspelBar/public/bars">Bares</a>
+                            <a class="dropdown-item" href="http://localhost/EspelBar/public/users">Usuarios</a>
+                            @endcan
+                            @canany(['isAdmin','isManager','isBar Editor'])
                             <a class="dropdown-item" href="http://localhost/EspelBar/public/buzons">Buzon</a>
                             <a class="dropdown-item" href="http://localhost/EspelBar/public/preferencias">Preferencias</a>
-                            <a class="dropdown-item" href="http://localhost/EspelBar/public/users">Usuarios</a>
+                            @endcan
+                            @can('isAdmin')
                             <a class="dropdown-item" href="http://localhost/EspelBar/public/roles">Roles</a>
+                            @endcan
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -122,6 +134,7 @@
                             <a class="dropdown-item" href="#">Preferencia</a>
                         </div>
                     </li>
+                    @endcan
                 </ul>
             </div>
         </nav>

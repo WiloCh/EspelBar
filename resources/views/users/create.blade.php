@@ -14,8 +14,7 @@
                 <li class="text-danger">{{ $error }}</li>
                 @endforeach
             </ul> @endif <form action="{{route('users.store')}}" method="POST" novalidate>
-            @csrf
-
+            @csrf            
             <div class="form-group">
                 <label for="name">Name</label>
                 <input class="form-control String" type="text" name="name" id="name" value="{{old('name')}}"

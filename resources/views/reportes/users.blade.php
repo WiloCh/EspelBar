@@ -10,7 +10,7 @@
         <div class="col">
             @foreach($users as $user)
             <h5>{{$user->name}}</h5>
-            <table class="table table-dark">
+            <table class="table table-striped table-bordered">
                 <tr>
                     <th>Email</th>                                
                     <th>Fecha Creado</th>                

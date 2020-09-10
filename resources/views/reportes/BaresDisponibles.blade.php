@@ -8,17 +8,29 @@
     @endif
     <div class="row">
         <div class="col">
-            <h5>Bares Disponibles</h5>
+            <h5 class="font-weight-bold">Bares Disponibles</h5>
             @foreach($bares as $bar)
-            <table class="table table-dark">
+            <table class="table table-striped table-bordered">
                 <tr>
-                    <th>Nombre</th>                                
-                    <th>Estado</th>                
-                    <th>Campus</th>
+                    <th class="align-middle">Nombre</th>                                
+                    <th class="align-middle">Estado</th>                
+                    <th class="align-middle">Campus</th>
                 </tr>
                 <tr>    
-                    <td>{{$bar->nombre}}</td>                
-                    <td>{{$bar->abierto}}</td>                
+                    <td class="align-middle">{{$bar->nombre}}</td>                
+                    <td class="align-middle">
+                        @if ($bar->abierto==1)
+                            {{'Abierto'}}
+                        @endif 
+                    </td>
+                    @foreach($campus as $campus)
+                        @if (strcmp($bar->campus_id, $campus->id) === 0)
+                            <td class="align-middle">
+                            {{$campus->nombre}}
+                            </td>  
+                        @endif 
+                    
+                    @endforeach              
                 </tr> 
             </table>
             @endforeach

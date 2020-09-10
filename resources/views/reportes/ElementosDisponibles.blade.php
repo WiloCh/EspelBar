@@ -8,38 +8,49 @@
     @endif
     <div class="row">
         <div class="col">
-            <h5>Menus Disponibles</h5>
-            @foreach($menus as $menu)
-            <table class="table table-dark">
+            <h5 class="font-weight-bold">Menus Disponibles</h5>
+            
+            <table  class="table table-striped table-bordered">
                 <tr>
-                    <th>Nombre</th>                                
-                    <th>Estado</th>                
-                    <th>Precio</th>
+                    <th class="align-middle">Nombre</th>                                
+                    <th class="align-middle">Estado</th>                
+                    <th class="align-middle">Precio</th>
                 </tr>
-                <tr>    
-                    <td>{{$menu->nombre}}</td>                
-                    <td>{{$menu->disponible}}</td>       
-                    <td>{{$menu->precio}}</td>           
-                </tr> 
+                @foreach($menus as $menu)
+                    <tr>    
+                        <td class="align-middle">{{$menu->nombre}}</td>                
+                        <td class="align-middle">
+                            @if ($menu->disponible==1)
+                                {{'Disponible'}}
+                            @endif 
+                        </td>     
+                        <td class="align-middle">{{$menu->precio}}</td>           
+                    </tr> 
+                @endforeach
             </table>
-            @endforeach
+            
         </div>
         <div class="col">
-            <h5>Snacks Disponibles</h5>
-            @foreach($snacks as $snack)
-            <table class="table table-dark">
+            <h5 class="font-weight-bold">Snacks Disponibles</h5>
+            <table  class="table table-striped table-bordered">
                 <tr>
-                    <th>Nombre</th>                                
-                    <th>Estado</th>                
-                    <th>Precio</th>
+                    <th class="align-middle">Nombre</th>                                
+                    <th class="align-middle">Estado</th>                
+                    <th class="align-middle">Precio</th>
                 </tr>
-                <tr>    
-                    <td>{{$snack->nombre}}</td>                
-                    <td>{{$snack->disponible}}</td>       
-                    <td>{{$snack->precio}}</td>           
-                </tr> 
+                @foreach($snacks as $snack)
+                    <tr>    
+                        <td class="align-middle">{{$snack->nombre}}</td>                
+                        <td class="align-middle">
+                            @if ($snack->disponible==1)
+                                {{'Disponible'}}
+                            @endif 
+                        </td>    
+                        <td class="align-middle">{{$snack->precio}}</td>           
+                    </tr> 
+                @endforeach
             </table>
-            @endforeach
+           
         </div>
     </div>
     <br>

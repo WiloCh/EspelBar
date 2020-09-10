@@ -112,8 +112,10 @@
                             Reportes
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{route('buzons.index')}}">Buzon</a>
-                            <a class="dropdown-item" href="{{route('preferencias.index')}}">Preferencia</a>
+                            <a class="dropdown-item" href="{{route('reportes.users')}}">Usuarios Registrados</a>
+                            <a class="dropdown-item" href="{{route('reportes.BaresDisponibles')}}">Bares Disponibles</a>
+                            <a class="dropdown-item" href="{{route('reportes.ElementosDisponibles')}}">Elementos Disponibles</a>
+                            <a class="dropdown-item" href="{{route('reportes.PreferenciaDia')}}">Preferencias Bar</a>
                         </div>
                     </li>
                 </ul>

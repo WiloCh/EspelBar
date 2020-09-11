@@ -29,6 +29,7 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
+        $this->authorize('create', User::class);
         if($request->ajax()){
             $roles = Role::where('id', $request->role_id)->first();
             $permissions = $roles->permissions;
@@ -63,6 +64,7 @@ class UserController extends Controller
 
     public function edit(Request $request, User $user)
     {
+        $this->authorize('edit', $user);
         $roles = Role::get();
         $userRole = $user->roles->first();
         if($userRole != null){
@@ -83,6 +85,7 @@ class UserController extends Controller
 
     public function update(UserPostRequest $request, User $user)
     {
+        $this->authorize('update', $user);
         $data = $request->validated();
         $user->fill($data);
         $user->save();
@@ -107,6 +110,7 @@ class UserController extends Controller
 
     public function destroy(Request $request, User $user)
     {
+        $this->authorize('delete', $user);
         $user->roles()->detach();
         $user->permissions()->detach();
         $user->delete();

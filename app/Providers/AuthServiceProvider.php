@@ -16,7 +16,10 @@ class AuthServiceProvider extends ServiceProvider
         'App\Menu' => 'App\Policies\MenuPolicy',
         'App\Snack' => 'App\Policies\SnackPolicy',
         'App\Buzon' => 'App\Policies\BuzonPolicy',
-        'App\Preferencia' => 'App\Policies\PreferenciaPolicy'
+        'App\Preferencia' => 'App\Policies\PreferenciaPolicy',
+        'App\Bar' => 'App\Policies\BarPolicy',
+        'App\Campus' => 'App\Policies\CampusPolicy'
+
     ];
 
     /**

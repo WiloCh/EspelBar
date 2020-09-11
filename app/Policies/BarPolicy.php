@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Preferencia;
+use App\Bar;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PreferenciaPolicy
+class BarPolicy
 {
     use HandlesAuthorization;
 
@@ -39,10 +39,10 @@ class PreferenciaPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Preferencia  $preferencia
+     * @param  \App\Bar  $bar
      * @return mixed
      */
-    public function view(User $user, Preferencia $preferencia)
+    public function view(User $user, Bar $bar)
     {
         //
     }
@@ -55,13 +55,10 @@ class PreferenciaPolicy
      */
     public function create(User $user)
     {
-        if ($user->roles->contains('slug', 'bar-editor')) {
-            return true;
-        }elseif($user->permissions->contains('slug', 'manager-create')){
-            return true;
-        }elseif($user->permissions->contains('slug', 'create')){
+        if($user->permissions->contains('slug', 'manager-create')){
             return true;
         }
+        
         return false;
     }
 
@@ -69,18 +66,14 @@ class PreferenciaPolicy
      * Undocumented function
      *
      * @param User $user
-     * @param Preferencia $preferencia
+     * @param Bar $bar
      * @return void
      */
-    public function edit(User $user, Preferencia $preferencia)
-    {
-        if($user->permissions->contains('slug', 'edit-prod')) {
-            return true;
-        }elseif ($user->roles->contains('slug', 'manager')){
-            return true;
-        }elseif ($user->permissions->contains('slug', 'edit')){
+    public function edit(User $user, Bar $bar){
+        if ($user->roles->contains('slug', 'manager')){
             return true;
         }
+
         return false;
     }
 
@@ -88,16 +81,12 @@ class PreferenciaPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Preferencia  $preferencia
+     * @param  \App\Bar  $bar
      * @return mixed
      */
-    public function update(User $user, Preferencia $preferencia)
+    public function update(User $user, Bar $bar)
     {
-        if($user->roles->contains('slug', 'bar-editor')){
-            return true;
-        } elseif($user->permissions->contains('slug', 'manager-edit')) {
-            return true;
-        } elseif ($user->permissions->contains('slug', 'edit')){
+        if($user->permissions->contains('slug', 'manager-edit')) {
             return true;
         }
 
@@ -108,16 +97,12 @@ class PreferenciaPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Preferencia  $preferencia
+     * @param  \App\Bar  $bar
      * @return mixed
      */
-    public function delete(User $user, Preferencia $preferencia)
+    public function delete(User $user, Bar $bar)
     {
         if($user->permissions->contains('slug', 'manager-delete')) {
-            return true;
-        } elseif ($user->roles->contains('slug', 'bar-editor')) {
-            return true;
-        } elseif ($user->permissions->contains('slug', 'delete')){
             return true;
         }
         return false;
@@ -127,10 +112,10 @@ class PreferenciaPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Preferencia  $preferencia
+     * @param  \App\Bar  $bar
      * @return mixed
      */
-    public function restore(User $user, Preferencia $preferencia)
+    public function restore(User $user, Bar $bar)
     {
         //
     }
@@ -139,10 +124,10 @@ class PreferenciaPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Preferencia  $preferencia
+     * @param  \App\Bar  $bar
      * @return mixed
      */
-    public function forceDelete(User $user, Preferencia $preferencia)
+    public function forceDelete(User $user, Bar $bar)
     {
         //
     }

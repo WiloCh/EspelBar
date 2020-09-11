@@ -26,12 +26,12 @@ class ReportesController extends Controller
 
     public function BaresDisponibles(Request $request)
     {
-        $campus=Campus::all();
+        $campuses = Campus::all();
         $bares=Bar::join('campuses', 'bars.campus_id', '=', 'campuses.id')
         ->select('bars.nombre','bars.abierto','bars.campus_id')
         ->where('bars.abierto','1')
         ->get();
-        return view('reportes.BaresDisponibles',compact('bares', 'campus'));
+        return view('reportes.BaresDisponibles',compact('bares', 'campuses'));
     }
 
     public function ElementosDisponibles(Request $request)

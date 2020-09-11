@@ -109,18 +109,16 @@
                             Administracion
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            @can('isAdmin')
-                            <a class="dropdown-item" href="http://localhost/EspelBar/public/campuses">Campus</a>
-                            @endcan
                             @canany(['isAdmin','isManager'])
+                            <a class="dropdown-item" href="http://localhost/EspelBar/public/campuses">Campus</a>
                             <a class="dropdown-item" href="http://localhost/EspelBar/public/bars">Bares</a>
-                            <a class="dropdown-item" href="http://localhost/EspelBar/public/users">Usuarios</a>
                             @endcan
                             @canany(['isAdmin','isManager','isBar Editor'])
                             <a class="dropdown-item" href="http://localhost/EspelBar/public/buzons">Buzon</a>
-                            <a class="dropdown-item" href="http://localhost/EspelBar/public/preferencias">Preferencias</a>
+                            <a class="dropdown-item" href="{{route('preferencias.index')}}">Preferencias</a>
                             @endcan
                             @can('isAdmin')
+                            <a class="dropdown-item" href="http://localhost/EspelBar/public/users">Usuarios</a>
                             <a class="dropdown-item" href="http://localhost/EspelBar/public/roles">Roles</a>
                             @endcan
                         </div>

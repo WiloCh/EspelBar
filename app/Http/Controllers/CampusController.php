@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CampusPostRequest;
 use App\Campus;
+use Illuminate\Support\Facades\Gate;
 
 
 class CampusController extends Controller
@@ -33,6 +34,7 @@ class CampusController extends Controller
 
     public function store(CampusPostRequest $request)
     {
+        $this->authorize('create', Campus::class);
         $data = $request->validated();
         $campus = Campus::create($data);
         return redirect()->route('campuses.index')->with('status', 'Registro Creado Exitosamente...!');
@@ -40,11 +42,13 @@ class CampusController extends Controller
 
     public function edit(Request $request, Campus $campus)
     {
+        $this->authorize('edit', $campus);
         return view('campuses.edit', compact('campus'));
     }
 
     public function update(CampusPostRequest $request, Campus $campus)
     {
+        $this->authorize('edit', $campus);
         $data = $request->validated();
         $campus->fill($data);
         $campus->save();
@@ -53,6 +57,7 @@ class CampusController extends Controller
 
     public function destroy(Request $request, Campus $campus)
     {
+        $this->authorize('delete', $campus);
         $campus->delete();
         return redirect()->route('campuses.index')->with('status', 'Registro Eliminado Exitosamente...!');
     }

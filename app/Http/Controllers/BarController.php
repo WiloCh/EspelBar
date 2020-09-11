@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BarPostRequest;
 use App\Bar;
+use Illuminate\Support\Facades\Gate;
 
 
 class BarController extends Controller
@@ -28,11 +29,12 @@ class BarController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Bar::class);
         return view('bars.create');
     }
 
     public function store(BarPostRequest $request)
-    {
+    {   
         $data = $request->validated();
         $bar = Bar::create($data);
         return redirect()->route('bars.index')->with('status', 'Registro Creado Exitosamente...!');
@@ -40,11 +42,13 @@ class BarController extends Controller
 
     public function edit(Request $request, Bar $bar)
     {
+        $this->authorize('edit', $bar);
         return view('bars.edit', compact('bar'));
     }
 
     public function update(BarPostRequest $request, Bar $bar)
     {
+        $this->authorize('update', $bar);
         $data = $request->validated();
         $bar->fill($data);
         $bar->save();
@@ -53,6 +57,7 @@ class BarController extends Controller
 
     public function destroy(Request $request, Bar $bar)
     {
+        $this->authorize('delete', $bar);
         $bar->delete();
         return redirect()->route('bars.index')->with('status', 'Registro Eliminado Exitosamente...!');
     }
